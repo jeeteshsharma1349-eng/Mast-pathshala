@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#11142b">
+<title>Masti Learning Kids — Premium</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#080b1b;--panel:#11152d;--card:#171c39;--line:#ffffff16;--text:#f8f8ff;--muted:#aeb4d0;--a:#7c6cff;--b:#ff66b3;--c:#4dd7ff;--gold:#ffd35a}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at 15% 0,#33256b 0,transparent 32%),radial-gradient(circle at 90% 10%,#3b194d 0,transparent 28%),linear-gradient(135deg,#070918,#101432 55%,#0a0c20);color:var(--text);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffffff18 1px,transparent 1px);background-size:24px 24px;opacity:.35}
+.app{max-width:700px;margin:auto;min-height:100vh;padding-bottom:90px;position:relative}
+header{margin:0 0 8px;padding:24px 18px 30px;background:linear-gradient(135deg,#6658f5e8,#9d5ee8d9 55%,#ef68b4d9);border-radius:0 0 34px 34px;box-shadow:0 18px 45px #0006}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.welcome{font-size:14px;color:#ffffffd9}h1{font-size:29px;margin:5px 0}.tag{font-size:12px;color:#ffffffb8}
+.stars{background:#ffffff20;border:1px solid #ffffff25;padding:11px 14px;border-radius:22px;font-weight:800;backdrop-filter:blur(10px);white-space:nowrap}
+.sound{border:1px solid #ffffff2b;background:#ffffff18;color:white;border-radius:18px;padding:7px 10px;cursor:pointer;margin-top:9px}
+main{padding:18px}.screen{display:none}.screen.active{display:block}.section-title{font-size:22px;margin:19px 0 12px}.back,.pill{border:1px solid var(--line);background:#ffffff0d;color:var(--text);padding:10px 14px;border-radius:15px;cursor:pointer}
+.daily{position:relative;overflow:hidden;padding:22px;border-radius:25px;background:linear-gradient(135deg,#ffb23f,#ff5f92 60%,#765fff);box-shadow:0 15px 40px #ff668c22;border:1px solid #ffffff20}.daily:after{content:"✨";position:absolute;font-size:90px;right:-5px;top:-22px;opacity:.18}.daily h2{margin:0 0 7px}.daily p{color:#fffde9;line-height:1.45}.primary{border:0;background:linear-gradient(135deg,#fff,#f0efff);color:#5c50df;padding:12px 17px;border-radius:22px;font-weight:800;cursor:pointer;margin:7px 5px 0 0;box-shadow:0 8px 18px #0002}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.card{position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,#171c3b,#11152d);color:var(--text);border-radius:23px;padding:20px 10px;min-height:150px;box-shadow:0 12px 25px #00025;cursor:pointer;transition:.18s}.card:active,.game:active,.primary:active{transform:scale(.97)}.card:before{content:"";position:absolute;width:70px;height:70px;border-radius:50%;background:#7c6cff22;right:-20px;top:-20px}.icon{font-size:42px}.card h3{margin:9px 0 4px}.muted{color:var(--muted);font-size:13px}
+.panel{background:linear-gradient(145deg,#151a36,#0f132a);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 14px 30px #0003;margin-bottom:14px}.hero{text-align:center}.big{font-size:82px;font-weight:900;color:#8d7dff;text-shadow:0 8px 30px #7c6cff55}.word{font-size:25px;font-weight:800}.row{display:flex;gap:8px;overflow-x:auto;padding-bottom:5px}.pill{white-space:nowrap}.pill.active{background:linear-gradient(135deg,var(--a),#9d62ef);border-color:transparent}.option{display:block;width:100%;margin:9px 0;padding:14px;border:1px solid var(--line);border-radius:17px;background:#ffffff0b;color:var(--text);text-align:left;font-weight:700;cursor:pointer}.option.correct{background:#28c98222;border-color:#28c98277}.option.wrong{background:#ff4f7022;border-color:#ff4f7077}.feedback{text-align:center;font-weight:800;min-height:28px;margin-top:10px}.score{text-align:center;margin-bottom:12px;color:#dce0f5}
+.gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.game{border:1px solid var(--line);background:linear-gradient(145deg,#181e3e,#10142c);color:var(--text);border-radius:20px;padding:20px 8px;cursor:pointer}.game span{font-size:40px}.game b{display:block;margin-top:7px}.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.memory button{height:65px;border:1px solid var(--line);border-radius:14px;background:#ffffff09;color:white;font-size:26px;cursor:pointer}.memory .open{background:#fff1c91f;border-color:#ffd35a88}
+.colorgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.colorgrid button{height:58px;border:0;border-radius:15px;cursor:pointer}
+.reward{display:flex;gap:14px;align-items:center;background:linear-gradient(145deg,#151a36,#0f132a);border:1px solid var(--line);padding:15px;border-radius:19px;margin:10px 0}.badge{font-size:42px}.locked{opacity:.4}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#ffffff09;border:1px solid var(--line);padding:15px 7px;border-radius:18px;text-align:center}.stat b{font-size:24px;display:block}.bar{height:13px;background:#ffffff12;border-radius:20px;overflow:hidden;margin-top:10px}.fill{height:100%;background:linear-gradient(90deg,#6c63ff,#ff68b4);width:0;transition:.5s}.story{background:linear-gradient(145deg,#171c3a,#10142b);border:1px solid var(--line);border-radius:22px;padding:18px;margin:10px 0}.story h3{margin-top:0}.story p{line-height:1.7;color:#d9ddf2}
+.bottom{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);width:min(700px,100%);display:grid;grid-template-columns:repeat(4,1fr);background:#0b0e22eF;border-top:1px solid var(--line);backdrop-filter:blur(16px);padding:9px 4px}.bottom button{border:0;background:transparent;color:#8f95b1;font-size:12px;cursor:pointer}.bottom span{display:block;font-size:23px}.bottom .active{color:white;font-weight:800}.toast{position:fixed;z-index:30;bottom:88px;left:50%;transform:translateX(-50%) translateY(10px);background:#f5f3ff;color:#27243e;padding:11px 17px;border-radius:22px;opacity:0;transition:.2s;font-weight:800;box-shadow:0 10px 30px #0006}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}.confetti i{position:absolute;width:8px;height:14px;animation:fall 900ms ease-out forwards}@keyframes fall{to{transform:translateY:100vh) rotate(720deg);opacity:0}}
+@media(max-width:380px){h1{font-size:24px}.grid{gap:9px}.card{min-height:140px}.big{font-size:70px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+<div class="top">
+<div>
+<div class="welcome">👋 Welcome Champ!</div>
+<h1>Masti Learning 🎓</h1>
+<div class="tag">Learn • Play • Grow • Smile ✨</div>
+<button class="sound" id="soundBtn" onclick="toggleSound()">🔊 Sound ON</button>
+</div>
+<div class="stars">⭐ <span id="stars">0</span></div>
+</div>
+</header>
+
+<section id="home" class="screen active"><main>
+<div class="daily"><h2>🌟 Today's Masti Challenge</h2><p>Quiz, game aur learning complete karo — stars collect karo aur level badhao!</p><button class="primary" onclick="go('quiz')">Start Challenge 🚀</button></div>
+<h2 class="section-title">📚 Learn & Play</h2>
+<div class="grid">
+<button class="card" onclick="go('abc')"><div class="icon">🔤</div><h3>ABC World</h3><p class="muted">A–Z + sounds</p></button>
+<button class="card" onclick="go('hindi')"><div class="icon">🇮🇳</div><h3>Hindi सीखो</h3><p class="muted">अक्षर + शब्द</p></button>
+<button class="card" onclick="go('math')"><div class="icon">🔢</div><h3>Maths Lab</h3><p class="muted">Addition + subtraction</p></button>
+<button class="card" onclick="go('quiz')"><div class="icon">🧠</div><h3>Quiz Arena</h3><p class="muted">20+ questions</p></button>
+<button class="card" onclick="go('games')"><div class="icon">🎮</div><h3>Game Zone</h3><p class="muted">4 fun games</p></button>
+<button class="card" onclick="go('stories')"><div class="icon">📖</div><h3>Story Time</h3><p class="muted">Hindi + English stories</p></button>
+<button class="card" onclick="go('rewards')"><div class="icon">🏆</div><h3>Rewards</h3><p class="muted">Badges & levels</p></button>
+<button class="card" onclick="go('progress')"><div class="icon">📊</div><h3>Progress</h3><p class="muted">Learning report</p></button>
+</div>
+</main></section>
+
+<section id="abc" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">🔤 ABC World</h2>
+<div class="panel hero"><div class="big" id="abcL">A</div><div class="word" id="abcW">🍎 Apple</div><p class="muted">Letter suno aur next word seekho.</p><button class="primary" onclick="speakABC()">🔊 Hear</button><button class="primary" onclick="nextABC()">Next ➡️</button><div class="feedback" id="abcF"></div></div><div class="row" id="abcP"></div></main></section>
+
+<section id="hindi" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">🇮🇳 Hindi सीखो</h2>
+<div class="panel hero"><div class="big" id="hiL">अ</div><div class="word" id="hiW">🍎 अनार</div><p class="muted">अक्षर और शब्द बोलकर सुनो।</p><button class="primary" onclick="speakHI()">🔊 सुनो</button><button class="primary" onclick="nextHI()">अगला ➡️</button><div class="feedback" id="hiF"></div></div><div class="row" id="hiP"></div></main></section>
+
+<section id="math" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">🔢 Maths Lab</h2>
+<div class="row"><button class="pill active" onclick="mathMode='add';newMath()">➕ Addition</button><button class="pill" onclick="mathMode='sub';newMath()">➖ Subtraction</button></div>
+<div class="panel"><div class="score">Math Stars: ⭐ <b id="ms">0</b></div><h2 id="mq" style="text-align:center;font-size:30px;margin:14px"></h2><div id="mo"></div><div class="feedback" id="mf"></div></div></main></section>
+
+<section id="quiz" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">🧠 Quiz Arena</h2>
+<div class="row"><button class="pill active" onclick="quizCat='mixed';resetQuiz()">🌈 Mixed</button><button class="pill" onclick="quizCat='science';resetQuiz()">🔬 Science</button><button class="pill" onclick="quizCat='gk';resetQuiz()">🌍 GK</button><button class="pill" onclick="quizCat='math';resetQuiz()">🔢 Maths</button></div>
+<div class="panel"><div class="score">Question <b id="qn">1</b>/10 · ⭐ <b id="qs">0</b></div><h3 id="qq" style="font-size:21px;text-align:center;line-height:1.4"></h3><div id="qo"></div><div class="feedback" id="qf"></div></div></main></section>
+
+<section id="games" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">🎮 Game Zone</h2>
+<div class="gamegrid">
+<button class="game" onclick="memory()"><span>🧩</span><b>Memory Match</b><small>Find pairs</small></button>
+<button class="game" onclick="numberHunt()"><span>🔢</span><b>Number Hunt</b><small>Find target</small></button>
+<button class="game" onclick="colorGame()"><span>🎨</span><b>Color Master</b><small>Pick color</small></button>
+<button class="game" onclick="oddGame()"><span>🕵️</span><b>Odd One Out</b><small>Find different</small></button>
+</div><div id="gameArea" style="margin-top:15px"></div></main></section>
+
+<section id="stories" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">📖 Story Time</h2><div class="row"><button class="pill active" onclick="showStories('hi')">🇮🇳 हिंदी</button><button class="pill" onclick="showStories('en')">🇬🇧 English</button></div><div class="panel" style="padding:12px;margin-top:12px"><div id="voiceStatus" style="font-weight:800">🎙️ Kids Voice ready</div><div class="row" style="margin-top:8px"><button class="pill" onclick="pauseVoice()">⏸️ Pause</button><button class="pill" onclick="resumeVoice()">▶️ Resume</button><button class="pill" onclick="stopVoice()">⏹️ Stop</button></div><div class="muted" style="margin-top:8px">👧 Kid-friendly voice • Hindi & English • slow & clear</div></div><div id="storyList"></div></main></section>
+
+<section id="rewards" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">🏆 Rewards</h2>
+<div class="reward" id="r1"><div class="badge">🥉</div><div><b>Bronze Learner</b><p>100 stars</p></div></div>
+<div class="reward" id="r2"><div class="badge">🥈</div><div><b>Smart Learner</b><p>500 stars</p></div></div>
+<div class="reward" id="r3"><div class="badge">🥇</div><div><b>Super Champ</b><p>1000 stars</p></div></div>
+<div class="reward" id="r4"><div class="badge">👑</div><div><b>Learning Champion</b><p>2500 stars</p></div></div></main></section>
+
+<section id="progress" class="screen"><main><button class="back" onclick="go('home')">← Home</button><h2 class="section-title">📊 My Progress</h2>
+<div class="stats"><div class="stat"><b id="ps">0</b><span>Stars</span></div><div class="stat"><b id="pc">0</b><span>Correct</span></div><div class="stat"><b id="pg">0</b><span>Games</span></div></div>
+<div class="panel" style="margin-top:13px"><b id="lvl">Level 1</b><div class="bar"><div class="fill" id="fill"></div></div><p class="muted" id="lt">100 stars to next level</p></div>
+<div class="panel"><b>🔥 Daily Streak</b><h2>1 Day</h2><p class="muted">Roz thoda seekho, roz masti karo!</p></div></main></section>
+
+<nav class="bottom"><button data-n="home" class="active" onclick="go('home')"><span>🏠</span>Home</button><button data-n="abc" onclick="go('abc')"><span>📚</span>Learn</button><button data-n="games" onclick="go('games')"><span>🎮</span>Games</button><button data-n="rewards" onclick="go('rewards')"><span>🏆</span>Rewards</button></nav>
+</div>
+<div class="toast" id="toast"></div><div class="confetti" id="confetti"></div>
+
+<script>
+const A=[["A","🍎 Apple"],["B","⚽ Ball"],["C","🐱 Cat"],["D","🐶 Dog"],["E","🥚 Egg"],["F","🐟 Fish"],["G","🍇 Grapes"],["H","🏠 House"],["I","🍦 Ice Cream"],["J","🧃 Juice"],["K","🪁 Kite"],["L","🦁 Lion"],["M","🐒 Monkey"],["N","👃 Nose"],["O","🍊 Orange"],["P","🐼 Panda"],["Q","👑 Queen"],["R","🌈 Rainbow"],["S","☀️ Sun"],["T","🐯 Tiger"],["U","☂️ Umbrella"],["V","🎻 Violin"],["W","🐳 Whale"],["X","🎵 Xylophone"],["Y","🧶 Yarn"],["Z","🦓 Zebra"]];
+const H=[["अ","🍎 अनार"],["आ","🥭 आम"],["इ","🍋 इमली"],["ई","🦅 ईगल"],["उ","🦉 उल्लू"],["ऊ","🐪 ऊँट"],["ए","🚂 इंजन"],["ऐ","🪞 ऐनक"],["ओ","🦜 ओखली"],["औ","💊 औषधि"],["क","🐦 कबूतर"],["ख","🐰 खरगोश"],["ग","🌼 गमला"],["घ","🏠 घर"]];
+const QUESTIONS=[
+["mixed","🐱 Which animal says meow?","Cat",["Cat","Dog","Cow","Hen"]],
+["mixed","🌈 Red + yellow makes which color?","Orange",["Green","Orange","Purple","Blue"]],
+["mixed","🔢 What comes after 9?","10",["8","10","11","12"]],
+["mixed","🍎 Which one is a fruit?","Apple",["Car","Apple","Chair","Book"]],
+["mixed","🌍 How many days are in a week?","7",["5","6","7","8"]],
+["science","🌱 What do plants need to grow?","Water",["Water","Plastic","Glass","Shoes"]],
+["science","☀️ What gives Earth light and heat?","Sun",["Moon","Sun","Cloud","Starfish"]],
+["science","🫁 Which organ helps us breathe?","Lungs",["Heart","Lungs","Stomach","Brain"]],
+["science","💧 Water becomes ice when it gets...","Cold",["Hot","Cold","Loud","Bright"]],
+["science","🐟 Which animal lives in water?","Fish",["Fish","Tiger","Horse","Lion"]],
+["gk","🇮🇳 What is the capital of India?","New Delhi",["Mumbai","New Delhi","Kolkata","Chennai"]],
+["gk","🌏 Which is the largest ocean?","Pacific",["Indian","Pacific","Arctic","Atlantic"]],
+["gk","🚦 What color means STOP?","Red",["Green","Blue","Red","White"]],
+["gk","📅 How many months are in a year?","12",["10","11","12","13"]],
+["gk","🐘 Which is the largest land animal?","Elephant",["Elephant","Cat","Dog","Rabbit"]],
+["math","➕ 4 + 5 = ?","9",["7","8","9","10"]],
+["math","➖ 10 - 3 = ?","7",["5","6","7","8"]],
+["math","✖️ 2 × 4 = ?","8",["6","7","8","9"]],
+["math","🔢 Which number is even?","8",["5","7","8","9"]],
+["math","🍬 3 candies + 2 candies = ?","5",["4","5","6","7"]]];
+const STORIES={
+hi:[
+["🐰 दयालु खरगोश","एक छोटा खरगोश जंगल में रहता था। एक दिन उसे एक भूखी चिड़िया मिली। खरगोश ने अपना खाना उसके साथ बाँट लिया। चिड़िया खुश हुई और दोनों अच्छे दोस्त बन गए। ❤️","सीख: दूसरों की मदद करने से खुशी बढ़ती है।"],
+["🦁 बहादुर शेर","एक छोटा शेर नई चीज़ सीखने से डरता था। उसने एक छोटा कदम उठाया, फिर दूसरा कदम उठाया। धीरे-धीरे उसका डर खत्म हो गया। 🦁","सीख: छोटे-छोटे कदम हमें बहादुर बनाते हैं।"],
+["🐢 समझदार कछुआ","कछुआ हमेशा अपना काम धीरे लेकिन ध्यान से करता था। उसने रोज़ थोड़ा अभ्यास किया और एक दिन सबसे मुश्किल पहेली हल कर दी। 🐢","सीख: रोज़ का अभ्यास सफलता की कुंजी है।"],
+["🐦 चिड़िया का घोंसला","एक छोटी चिड़िया अपना घोंसला बना रही थी। तेज़ हवा से कुछ तिनके गिर गए। उसने हार नहीं मानी और फिर से घोंसला बनाया। शाम तक उसका सुंदर घर तैयार था। 🏡","सीख: कोशिश करते रहना बहुत जरूरी है।"],
+["🐘 छोटा हाथी","छोटा हाथी सोचता था कि वह बहुत छोटा है। एक दिन उसने नदी में फँसे जानवरों को अपनी सूंड से पानी पिलाया। सबने उसकी तारीफ की। 🐘","सीख: हर किसी के अंदर कोई न कोई खास गुण होता है।"]
+],
+en:[
+["🐰 The Kind Rabbit","A little rabbit found a hungry bird and shared his lunch. They became good friends.","Kindness makes everyone happier."],
+["🦁 The Brave Lion","A young lion was scared to try something new. He took one small step and became braver.","Small steps can make you brave."],
+["🐢 The Smart Tortoise","The tortoise practiced a little every day and finally solved a difficult puzzle.","Daily practice makes us better."],
+["🐦 The Little Bird","A little bird rebuilt her nest after the wind blew it away.","Never give up after a setback."],
+["🐘 The Little Elephant","A little elephant helped other animals by giving them water with his trunk.","Everyone has something special to share."]
+]};
+let stars=+localStorage.getItem("mlPremiumStars")||0,correct=+localStorage.getItem("mlPremiumCorrect")||0,games=+localStorage.getItem("mlPremiumGames")||0;
+let ai=0,hi=0,mathMode="add",mathStars=0,quizCat="mixed",quizNo=0,quizScore=0,busy=false,soundOn=localStorage.getItem("mlSound")!=="off";
+
+function tone(freq=600,dur=.09,type="sine"){if(!soundOn)return;try{let C=window.AudioContext||window.webkitAudioContext;if(!C)return;let c=new C(),o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.04,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur)}catch(e){}}
+function correctSound(){tone(700,.08);setTimeout(()=>tone(950,.12),80)}
+function wrongSound(){tone(220,.13,"triangle")}
+function toggleSound(){soundOn=!soundOn;localStorage.setItem("mlSound",soundOn?"on":"off");document.getElementById("soundBtn").textContent=soundOn?"🔊 Sound ON":"🔇 Sound OFF";if(soundOn)tone(700,.1)}
+function save(){localStorage.setItem("mlPremiumStars",stars);localStorage.setItem("mlPremiumCorrect",correct);localStorage.setItem("mlPremiumGames",games);ui()}
+function ui(){["stars","ps"].forEach(id=>document.getElementById(id).textContent=stars);document.getElementById("pc").textContent=correct;document.getElementById("pg").textContent=games;let l=Math.floor(stars/100)+1,p=stars%100;document.getElementById("fill").style.width=p+"%";document.getElementById("lvl").textContent="Level "+l;document.getElementById("lt").textContent=(100-p)+" stars to next level";[[100,"r1"],[500,"r2"],[1000,"r3"],[2500,"r4"]].forEach(x=>document.getElementById(x[1]).classList.toggle("locked",stars<x[0]))}
+function add(n,msg){stars+=n;correct++;save();toast(msg||`⭐ +${n} Stars`);correctSound();if(n>=15)celebrate()}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),1500)}
+function celebrate(){let c=document.getElementById("confetti");c.innerHTML="";for(let i=0;i<30;i++){let s=document.createElement("i");s.style.left=Math.random()*100+"%";s.style.top="-20px";s.style.animationDelay=Math.random()*250+"ms";s.style.background=["#7c6cff","#ff66b3","#4dd7ff","#ffd35a"][i%4];c.appendChild(s)}setTimeout(()=>c.innerHTML="",1100)}
+function go(id){tone(420,.04);document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".bottom button").forEach(b=>b.classList.toggle("active",b.dataset.n===id));scrollTo(0,0);if(id==="quiz")renderQuiz();if(id==="stories")showStories("hi");if(id==="progress"||id==="rewards")ui()}
+/* Kid-friendly voice engine — uses the phone/browser's installed TTS voice.
+   A true recorded child voice cannot be embedded in a single offline HTML file,
+   so we use the closest available Hindi/English voice with a brighter pitch,
+   slower speed and short sentence chunks for reliable Android Chrome playback. */
+let speechQueue=[];
+let speechIndex=0;
+let speechActive=false;
+let speechPaused=false;
+let selectedVoice=null;
+
+function voiceList(){
+  return ('speechSynthesis' in window) ? window.speechSynthesis.getVoices() : [];
+}
+
+function pickVoice(isHindi){
+  const voices=voiceList();
+  const wanted=isHindi ? ['hi-IN','hi'] : ['en-IN','en-US','en-GB','en'];
+  const exact=voices.filter(v=>wanted.some(x=>v.lang.toLowerCase()===x.toLowerCase()));
+  const same=voices.filter(v=>wanted.some(x=>v.lang.toLowerCase().startsWith(x.split('-')[0].toLowerCase())));
+  const pool=exact.length ? exact : same;
+  // Prefer Google/Indian voices where available; otherwise use the first matching voice.
+  const preferred=pool.find(v=>/google|india|female|woman|girl|child|kid|samantha|ava/i.test(v.name));
+  selectedVoice=preferred || pool[0] || null;
+  return selectedVoice;
+}
+
+function splitSpeech(text){
+  const clean=String(text).replace(/\s+/g,' ').trim();
+  if(!clean)return [];
+  const parts=clean.match(/[^.!?।॥]+[.!?।॥]+|[^.!?।॥]+$/g)||[clean];
+  const out=[]; let buf='';
+  parts.forEach(p=>{
+    p=p.trim();
+    if(!p)return;
+    if((buf+' '+p).trim().length<=150) buf=(buf?' '+buf:'') ? (buf+' '+p).trim() : p;
+    else {if(buf)out.push(buf);buf=p;}
+  });
+  if(buf)out.push(buf);
+  return out;
+}
+
+function setVoiceStatus(t){
+  const b=document.getElementById('voiceStatus');
+  if(b)b.textContent=t;
+}
+
+function stopVoice(){
+  if(window.AndroidTTS && window.AndroidTTS.stop){try{window.AndroidTTS.stop();}catch(e){}}
+  if('speechSynthesis' in window){try{window.speechSynthesis.cancel();}catch(e){}}
+  try{if(webAudio){webAudio.pause();webAudio.currentTime=0;}}catch(e){}
+  webAudioQueue=[];webAudioIndex=0;speechQueue=[];speechIndex=0;speechActive=false;speechPaused=false;
+  setVoiceStatus('🎙️ Kids Voice ready');
+}
+
+function pauseVoice(){
+  if(!('speechSynthesis' in window))return;
+  if(window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+    window.speechSynthesis.pause(); speechPaused=true; setVoiceStatus('⏸️ Voice paused');
+  }
+}
+
+function resumeVoice(){
+  if(!('speechSynthesis' in window))return;
+  if(window.speechSynthesis.paused){
+    window.speechSynthesis.resume(); speechPaused=false; setVoiceStatus('▶️ Kids Voice playing');
+  }else if(speechActive){
+    // Some Android Chrome versions cancel a queued utterance after the page resumes.
+    speakQueueNow();
+  }
+}
+
+function speakQueueNow(){
+  if(!speechActive || speechIndex>=speechQueue.length){
+    speechActive=false; speechPaused=false; setVoiceStatus('🎙️ Kids Voice ready'); return;
+  }
+  const text=speechQueue[speechIndex];
+  const isHindi=/[\u0900-\u097F]/.test(text);
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=isHindi?'hi-IN':'en-IN';
+  u.rate=isHindi?0.76:0.80;
+  u.pitch=isHindi?1.28:1.22;
+  u.volume=1;
+  const v=pickVoice(isHindi);
+  if(v)u.voice=v;
+  u.onend=function(){
+    if(!speechActive)return;
+    speechIndex++;
+    if(speechIndex<speechQueue.length){
+      setTimeout(speakQueueNow,120);
+    }else{
+      speechActive=false; speechPaused=false; setVoiceStatus('🎙️ Kids Voice ready');
+    }
+  };
+  u.onerror=function(){
+    // Try the same text once with the browser's default voice.
+    if(u.__retry){
+      speechIndex++;
+      setTimeout(speakQueueNow,120);
+    }else{
+      u.__retry=true;
+      setTimeout(function(){
+        const retry=new SpeechSynthesisUtterance(text);
+        retry.lang=isHindi?'hi-IN':'en-IN'; retry.rate=isHindi?0.76:0.80; retry.pitch=isHindi?1.28:1.22; retry.volume=1;
+        retry.onend=u.onend; retry.onerror=function(){speechIndex++;setTimeout(speakQueueNow,120)};
+        try{window.speechSynthesis.speak(retry);}catch(e){speechIndex++;setTimeout(speakQueueNow,120)}
+      },120);
+    }
+  };
+  try{
+    // IMPORTANT: speak is called immediately for the first chunk from the button tap.
+    window.speechSynthesis.speak(u);
+  }catch(e){
+    speechActive=false; setVoiceStatus('⚠️ Voice start failed'); toast('🔊 Voice start nahi ho paayi — phone ka Media volume check karein');
+  }
+}
+
+let webAudio=null;
+let webAudioQueue=[];
+let webAudioIndex=0;
+
+function googleTTSUrl(text, lang){
+  return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=' +
+    encodeURIComponent(lang) + '&q=' + encodeURIComponent(text);
+}
+function playWebAudioQueue(){
+  if(!soundOn || webAudioIndex>=webAudioQueue.length){
+    if(webAudio){try{webAudio.pause();webAudio.currentTime=0;}catch(e){}}
+    speechActive=false; setVoiceStatus('🎙️ Kids Voice ready'); return;
+  }
+  const item=webAudioQueue[webAudioIndex];
+  const a=new Audio();
+  webAudio=a;
+  a.volume=1;
+  a.src=googleTTSUrl(item.text,item.lang);
+  setVoiceStatus('👧 Kids Voice playing');
+  a.onended=()=>{webAudioIndex++; setTimeout(playWebAudioQueue,80)};
+  a.onerror=()=>{
+    // If online TTS is unavailable, fall back to the phone's built-in speech engine.
+    speechQueue=webAudioQueue.map(x=>x.text);
+    speechIndex=0; speechActive=true;
+    speakQueueNow();
+  };
+  const promise=a.play();
+  if(promise && promise.catch) promise.catch(()=>{
+    // Browser blocked the remote audio; try native TTS.
+    speechQueue=webAudioQueue.map(x=>x.text);
+    speechIndex=0; speechActive=true;
+    speakQueueNow();
+  });
+}
+function speak(t){
+  if(!soundOn){toast('🔇 Sound OFF — ऊपर Sound ON दबाएँ');return;}
+  if(window.AndroidTTS && window.AndroidTTS.speak){
+    try{
+      const text=String(t||'').trim();
+      if(!text)return;
+      const lang=/[\u0900-\u097F]/.test(text)?'hi-IN':'en-IN';
+      window.AndroidTTS.speak(text,lang);
+      setVoiceStatus('👧 Kids Voice playing');
+      return;
+    }catch(e){}
+  }
+  const text=String(t||'').trim();
+  if(!text){return;}
+  // Cancel previous playback.
+  try{window.speechSynthesis && window.speechSynthesis.cancel();}catch(e){}
+  try{if(webAudio){webAudio.pause();webAudio.currentTime=0;}}catch(e){}
+  // Online kid-friendly TTS first. This works even when Android Chrome has no Hindi TTS voice installed.
+  const lang=/[\u0900-\u097F]/.test(text)?'hi-IN':'en-IN';
+  const chunks=splitSpeech(text);
+  webAudioQueue=chunks.map(x=>({text:x,lang}));
+  webAudioIndex=0; speechActive=true; speechPaused=false;
+  setVoiceStatus('👧 Kids Voice starting…');
+  playWebAudioQueue();
+}
+function pauseVoice(){
+  if(window.AndroidTTS && window.AndroidTTS.pause){try{window.AndroidTTS.pause();setVoiceStatus('⏸️ Voice paused');return;}catch(e){}}
+  if(webAudio && !webAudio.paused){webAudio.pause();speechPaused=true;setVoiceStatus('⏸️ Voice paused');return;}
+  if(window.speechSynthesis && window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+    window.speechSynthesis.pause();speechPaused=true;setVoiceStatus('⏸️ Voice paused');
+  }
+}
+function resumeVoice(){
+  if(window.AndroidTTS && window.AndroidTTS.resume){try{window.AndroidTTS.resume();setVoiceStatus('▶️ Kids Voice playing');return;}catch(e){}}
+  if(webAudio && webAudio.paused && speechActive){webAudio.play().catch(()=>{});speechPaused=false;setVoiceStatus('▶️ Kids Voice playing');return;}
+  if(window.speechSynthesis && window.speechSynthesis.paused){window.speechSynthesis.resume();speechPaused=false;setVoiceStatus('▶️ Kids Voice playing');}
+}
+
+function renderABC(){document.getElementById("abcL").textContent=A[ai][0];document.getElementById("abcW").textContent=A[ai][1];document.getElementById("abcP").innerHTML=A.map((x,i)=>`<button class="pill ${i===ai?"active":""}" onclick="setABC(${i})">${x[0]}</button>`).join("")}
+function setABC(i){ai=i;renderABC();tone(600,.06)}
+function nextABC(){ai=(ai+1)%A.length;renderABC();add(5,"🎉 +5 Stars");speak(A[ai][0])}
+function speakABC(){speak(A[ai][0]+" for "+A[ai][1].replace(/[^\w ]/g,""))}
+function renderHI(){document.getElementById("hiL").textContent=H[hi][0];document.getElementById("hiW").textContent=H[hi][1];document.getElementById("hiP").innerHTML=H.map((x,i)=>`<button class="pill ${i===hi?"active":""}" onclick="setHI(${i})">${x[0]}</button>`).join("")}
+function setHI(i){hi=i;renderHI();tone(600,.06)}
+function nextHI(){hi=(hi+1)%H.length;renderHI();add(5,"🎉 +5 Stars");speak(H[hi][0])}
+function speakHI(){speak(H[hi][0]+" से "+H[hi][1].replace(/[^\u0900-\u097F ]/g,""))}
+function newMath(){let a=Math.floor(Math.random()*15)+1,b=Math.floor(Math.random()*15)+1;if(mathMode==="sub"&&b>a)[a,b]=[b,a];let ans=mathMode==="add"?a+b:a-b;document.getElementById("mq").textContent=`${a} ${mathMode==="add"?"+":"−"} ${b} = ?`;let opts=[ans,ans+1,Math.max(0,ans-1),ans+2].sort(()=>Math.random()-.5);document.getElementById("mo").innerHTML=opts.map(x=>`<button class="option" onclick="mathAns(${x},${ans})">${x}</button>`).join("");document.getElementById("mf").textContent=""}
+function mathAns(x,a){if(x===a){mathStars+=10;document.getElementById("ms").textContent=mathStars;add(10,"🌟 Correct! +10");setTimeout(newMath,450)}else{wrongSound();document.getElementById("mf").textContent="😊 Try again!"}}
+function resetQuiz(){quizNo=0;quizScore=0;renderQuiz()}
+function renderQuiz(){let pool=QUESTIONS.filter(q=>quizCat==="mixed"||q[0]===quizCat),q=pool[quizNo%pool.length];document.getElementById("qn").textContent=Math.min(quizNo+1,10);document.getElementById("qs").textContent=quizScore;document.getElementById("qq").textContent=q[1];document.getElementById("qo").innerHTML=q[3].sort(()=>Math.random()-.5).map(o=>`<button class="option" onclick='quizAns(${JSON.stringify(o)},${JSON.stringify(q[2])})'>${o}</button>`).join("");document.getElementById("qf").textContent=""}
+function quizAns(o,a){if(o===a){quizScore+=10;add(10,"🎉 Correct! +10");document.getElementById("qf").textContent="⭐ Excellent!"}else{wrongSound();document.getElementById("qf").textContent="😊 Nice try!"}setTimeout(()=>{quizNo++;if(quizNo>=10){toast(`🏆 Quiz complete: ${quizScore}/100`);quizNo=0;quizScore=0}renderQuiz()},500)}
+function memory(){games++;save();let vals=["🍎","🍎","🐱","🐱","🚗","🚗","⭐","⭐","🐸","🐸","🍕","🍕"].sort(()=>Math.random()-.5);window.mm=vals.map(v=>({v,o:false,d:false}));window.first=-1;document.getElementById("gameArea").innerHTML=`<div class="panel"><h3>🧩 Find all matching pairs</h3><div class="memory">${vals.map((_,i)=>`<button id="m${i}" onclick="flip(${i})">❓</button>`).join("")}</div><div class="feedback" id="gm"></div></div>`}
+function flip(i){if(busy||mm[i].o||mm[i].d)return;mm[i].o=true;let b=document.getElementById("m"+i);b.textContent=mm[i].v;b.classList.add("open");tone(500,.04);if(first<0){first=i;return}busy=true;if(mm[first].v===mm[i].v){mm[first].d=mm[i].d=true;add(15,"🧩 Pair found! +15");first=-1;busy=false;if(mm.every(x=>x.d))document.getElementById("gm").textContent="🏆 All pairs complete!"}else{wrongSound();setTimeout(()=>{[first,i].forEach(j=>{mm[j].o=false;let z=document.getElementById("m"+j);z.textContent="❓";z.classList.remove("open")});first=-1;busy=false},650)}}
+function numberHunt(){games++;save();let target=Math.floor(Math.random()*20)+1,arr=[target];while(arr.length<6){let n=Math.floor(Math.random()*20)+1;if(!arr.includes(n))arr.push(n)}arr.sort(()=>Math.random()-.5);document.getElementById("gameArea").innerHTML=`<div class="panel" style="text-align:center"><h3>🔢 Find number <b>${target}</b></h3><div class="gamegrid" style="margin-top:12px">${arr.map(n=>`<button class="game" onclick="numAns(${n},${target})"><span>${n}</span></button>`).join("")}</div><div class="feedback" id="gm"></div></div>`}
+function numAns(n,t){if(n===t){add(15,"🎉 Found it! +15");document.getElementById("gm").textContent="🌟 Correct!"}else{wrongSound();document.getElementById("gm").textContent="😊 Try again!"}}
+function colorGame(){games++;save();let C=[["RED","#ff536d"],["BLUE","#4d83ff"],["GREEN","#2db673"],["YELLOW","#f7c83b"],["PURPLE","#8a62e8"],["ORANGE","#ff9a3d"]],t=C[Math.floor(Math.random()*C.length)];document.getElementById("gameArea").innerHTML=`<div class="panel"><h3>🎨 Tap the <b>${t[0]}</b> color</h3><div class="colorgrid" style="margin-top:12px">${C.map(c=>`<button style="background:${c[1]}" onclick="colAns('${c[0]}','${t[0]}')"></button>`).join("")}</div><div class="feedback" id="gm"></div></div>`}
+function colAns(a,t){if(a===t){add(15,"🌈 Perfect! +15");document.getElementById("gm").textContent="🎨 Correct!"}else{wrongSound();document.getElementById("gm").textContent="😊 Try again!"}}
+function oddGame(){games++;save();let sets=[["🐶","🐶","🐶","🐱"],["🍎","🍎","🍌","🍎"],["⭐","⭐","🌙","⭐"],["🚗","🚗","🚲","🚗"]],s=sets[Math.floor(Math.random()*sets.length)],odd=s.find((x,i)=>s.indexOf(x)===i&&s.filter(y=>y===x).length===1);document.getElementById("gameArea").innerHTML=`<div class="panel" style="text-align:center"><h3>🕵️ Find the odd one!</h3><div class="gamegrid" style="margin-top:12px">${s.map(x=>`<button class="game" onclick="oddAns('${x}','${odd}')"><span>${x}</span></button>`).join("")}</div><div class="feedback" id="gm"></div></div>`}
+function oddAns(a,o){if(a===o){add(20,"🕵️ Great! +20");document.getElementById("gm").textContent="🏆 You found it!"}else{wrongSound();document.getElementById("gm").textContent="😊 Look carefully!"}}
+let currentStoryLang="hi";
+function playStory(i){
+  const arr=STORIES[currentStoryLang]||[];
+  if(arr[i]) speak(arr[i][1]);
+}
+function showStories(lang){
+  currentStoryLang=lang;
+  let arr=STORIES[lang]||[];
+  document.getElementById("storyList").innerHTML=arr.map((s,i)=>`<div class="story"><h3>${s[0]}</h3><p>${s[1]}</p><p><b>💡 सीख:</b> ${s[2]}</p><button class="primary storyBtn" data-story="${i}" type="button">🔊 कहानी सुनो</button></div>`).join("");
+  document.querySelectorAll(".storyBtn").forEach(btn=>btn.addEventListener("click",()=>playStory(Number(btn.dataset.story))));
+}
+document.getElementById("soundBtn").textContent=soundOn?"🔊 Sound ON":"🔇 Sound OFF";
+renderABC();renderHI();newMath();resetQuiz();showStories("hi");ui();
+</script>
+</body>
+</html>
