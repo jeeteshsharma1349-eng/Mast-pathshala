@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
     private Locale pendingLocale = Locale.US;
 
     @Override
-    public void onCreate(Bundle b) {
+    protected void onCreate(Bundle b) {
         super.onCreate(b);
 
         web = new WebView(this);
@@ -53,9 +53,9 @@ public class MainActivity extends Activity {
         int result = tts.setLanguage(locale);
 
         if (result == TextToSpeech.LANG_MISSING_DATA ||
-            result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                result == TextToSpeech.LANG_NOT_SUPPORTED) {
 
-            if (locale.getLanguage().equals("hi")) {
+            if ("hi".equals(locale.getLanguage())) {
                 tts.setLanguage(new Locale("hi", "IN"));
             } else {
                 tts.setLanguage(Locale.US);
@@ -66,10 +66,10 @@ public class MainActivity extends Activity {
         tts.setPitch(1.25f);
 
         tts.speak(
-            text,
-            TextToSpeech.QUEUE_FLUSH,
-            null,
-            "masti-story"
+                text,
+                TextToSpeech.QUEUE_FLUSH,
+                null,
+                "masti-story"
         );
     }
 
@@ -82,7 +82,54 @@ public class MainActivity extends Activity {
             if (lang != null && lang.startsWith("hi")) {
                 pendingLocale = new Locale("hi", "IN");
             } else {
-                pendingLocale = new Locale("en", "IN");
+                pendingLocale = Locale.US;
             }
 
-            runOnUiThread
+            runOnUiThread(() -> {
+                speakNow(pendingText, pendingLocale);
+            });
+        }
+
+        @JavascriptInterface
+        public void pause() {
+            runOnUiThread(() -> {
+                if (tts != null) {
+                    tts.stop();
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void resume() {
+            runOnUiThread(() -> {
+                if (!pendingText.isEmpty()) {
+                    speakNow(pendingText, pendingLocale);
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void stop() {
+            runOnUiThread(() -> {
+                if (tts != null) {
+                    tts.stop();
+                }
+                pendingText = "";
+            });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+
+        if (web != null) {
+            web.destroy();
+        }
+
+        super.onDestroy();
+    }
+}
